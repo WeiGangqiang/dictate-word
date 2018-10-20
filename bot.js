@@ -31,19 +31,19 @@ aixbot.onEvent('enterSkill', (ctx) => {
 aixbot.hears(/(好的)|(好了)|(行)|(可以)|(好)/, (ctx) => {
     ctx.curWord = ctx.words[index]
     index = (index + 1) % ctx.words.length
-    ctx.speak(`${ctx.curWord}`).wait();
+    ctx.speak(`${ctx.curWord}`)..directiveAudio("http://xiaoda.ai/audios/audio?name=05").wait();
 });
 
 // define text handler
 aixbot.hears(/(下一个)|(换一个)|(写完了)|(换)|(再换)|(写好了)|(再换一个)|(再下一个)/, (ctx) => {
     ctx.curWord = ctx.words[index]
     index = (index + 1) % ctx.words.length
-    ctx.speak(`${ctx.curWord}`).wait();
+    ctx.speak(`${ctx.curWord}`).directiveAudio("http://xiaoda.ai/audios/audio?name=05").wait();
 });
 
 aixbot.onEvent('noResponse', async (ctx) =>{
-    ctx.directiveAudio("http://xiaoda.ai/audios/audio?name=05").wait();
-    // ctx.speak("写完了对我说下一个").wait();
+    // ctx.directiveAudio("http://xiaoda.ai/audios/audio?name=05").wait();
+    ctx.speak("写完了对我说下一个").wait();
 });
 
 // define text handler
