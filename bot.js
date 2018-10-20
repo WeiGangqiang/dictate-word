@@ -28,14 +28,14 @@ aixbot.onEvent('enterSkill', (ctx) => {
 });
 
 // define text handler
-aixbot.hears('好了', (ctx) => {
+aixbot.hears('/(好的)|(好了)|(行)|(可以)|(好)/', (ctx) => {
     ctx.curWord = ctx.words[index]
     index = (index + 1) % ctx.words.length
     ctx.speak(`${ctx.curWord}`).wait();
 });
 
 // define text handler
-aixbot.hears('下一个', (ctx) => {
+aixbot.hears('/(下一个)|(换一个)|(写完了)|(换)|(再换)|(写好了)|(再换一个)|(再下一个)/', (ctx) => {
     ctx.curWord = ctx.words[index]
     index = (index + 1) % ctx.words.length
     ctx.speak(`${ctx.curWord}`).wait();
@@ -46,14 +46,14 @@ aixbot.onEvent('noResponse', async (ctx) =>{
 });
 
 // define text handler
-aixbot.hears('退出', (ctx) => {
+aixbot.hears('/(退出)|(不写了)|(退出)|(离开)|(休息)/', (ctx) => {
     ctx.reply('再见').closeSession();
 });
 
-// define regex handler
-aixbot.hears(/\W+/, (ctx) => {
-    ctx.speak(ctx.request.query);
-});
+// // define regex handler
+// aixbot.hears(/\W+/, (ctx) => {
+//     ctx.speak(ctx.request.query);
+// });
 
 // close session
 aixbot.onEvent('quitSkill', (ctx) => {
