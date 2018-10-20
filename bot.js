@@ -31,7 +31,7 @@ aixbot.onEvent('enterSkill', (ctx) => {
 aixbot.hears(/(好的)|(好了)|(行)|(可以)|(好)/, (ctx) => {
     ctx.curWord = ctx.words[index]
     index = (index + 1) % ctx.words.length
-    ctx.speak(`${ctx.curWord}`)..directiveAudio("http://xiaoda.ai/audios/audio?name=05").wait();
+    ctx.speak(`${ctx.curWord}`).directiveAudio("http://xiaoda.ai/audios/audio?name=05").wait();
 });
 
 // define text handler
