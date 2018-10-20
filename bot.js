@@ -3,6 +3,8 @@ const logger = require('./logger').logger('index');
 
 const aixbot = new AixBot();
 
+var index = 0
+
 // define middleware for response time
 aixbot.use(async (ctx, next) => {
     console.log(`process request for '${ctx.request.query}' ...`);
@@ -17,7 +19,6 @@ aixbot.use(async (ctx, next) => {
     ctx.words = [
         "波浪","浪花","海浪","灯光","电灯","作文","工作"
     ]
-    ctx.index = 0
     await next();
 });
 
@@ -28,15 +29,15 @@ aixbot.onEvent('enterSkill', (ctx) => {
 
 // define text handler
 aixbot.hears('好了', (ctx) => {
-    ctx.curWord = ctx.words[ctx.index]
-    ctx.index = (ctx.index + 1) % ctx.words.length
+    ctx.curWord = ctx.words[index]
+    index = (index + 1) % ctx.words.length
     ctx.speak(`${ctx.curWord}`).wait();
 });
 
 // define text handler
 aixbot.hears('下一个', (ctx) => {
-    ctx.curWord = ctx.words[ctx.index]
-    ctx.index = (ctx.index + 1) % ctx.words.length
+    ctx.curWord = ctx.words[index]
+    index = (index + 1) % ctx.words.length
     ctx.speak(`${ctx.curWord}`).wait();
 });
 
