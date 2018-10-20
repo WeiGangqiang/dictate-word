@@ -41,6 +41,10 @@ aixbot.hears('下一个', (ctx) => {
     ctx.speak(`${ctx.curWord}`).wait();
 });
 
+aixbot.onEvent('noResponse', async (ctx) =>{
+    ctx.speck("写完了对我说下一个").wait();
+});
+
 // define text handler
 aixbot.hears('退出', (ctx) => {
     ctx.reply('再见').closeSession();
