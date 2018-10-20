@@ -14,20 +14,35 @@ aixbot.use(async (ctx, next) => {
 
 // define middleware for DB
 aixbot.use(async (ctx, next) => {
-    ctx.db = {
-        username : 'Bowen'
-    };
+    ctx.words = [
+        "波浪","浪花","海浪","灯光","电灯","作文","工作"
+    ]
+    ctx.index = 0
     await next();
 });
 
 // define event handler
 aixbot.onEvent('enterSkill', (ctx) => {
-    ctx.speak('你好').wait();
+    ctx.speak('现在开始默写今天的单词吧， 你准备好了吗').wait();
 });
 
 // define text handler
-aixbot.hears('你是谁', (ctx) => {
-    ctx.speak(`我是${ctx.db.username}`).wait();
+aixbot.hears('好了', (ctx) => {
+    ctx.curWord = ctx.words[ctx.index]
+    ctx.index = (ctx.index + 1) % ctx.words.length
+    ctx.speak(`${ctx.curWord}`).wait();
+});
+
+// define text handler
+aixbot.hears('下一个', (ctx) => {
+    ctx.curWord = ctx.words[ctx.index]
+    ctx.index = (ctx.index + 1) % ctx.words.length
+    ctx.speak(`${ctx.curWord}`).wait();
+});
+
+// define text handler
+aixbot.hears('退出', (ctx) => {
+    ctx.reply('再见').closeSession();
 });
 
 // define regex handler
