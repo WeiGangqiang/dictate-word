@@ -46,14 +46,9 @@ aixbot.onEvent('noResponse', async (ctx) =>{
 });
 
 // define text handler
-aixbot.hears('/(退出)|(不写了)|(退出)|(离开)|(休息)/', (ctx) => {
+aixbot.hears(/(退出)|(不写了)|(退出)|(离开)|(休息)/, (ctx) => {
     ctx.reply('再见').closeSession();
 });
-
-// // define regex handler
-// aixbot.hears(/\W+/, (ctx) => {
-//     ctx.speak(ctx.request.query);
-// });
 
 // close session
 aixbot.onEvent('quitSkill', (ctx) => {
