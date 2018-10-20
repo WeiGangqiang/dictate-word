@@ -42,7 +42,7 @@ aixbot.hears('下一个', (ctx) => {
 });
 
 aixbot.onEvent('noResponse', async (ctx) =>{
-    ctx.speck("写完了对我说下一个").wait();
+    ctx.speak("写完了对我说下一个").wait();
 });
 
 // define text handler
