@@ -22,38 +22,6 @@ aixbot.use(async (ctx, next) => {
         const res = await getResponse();
         if (res.data && res.data.length > 0) {
             if (res.data[0].type === 'quit-app') return ctx.reply(res.reply).closeSession();
-            if (res.data[0].type === 'start-record') {
-                if (res.data[0]['audio-url']) {
-                    return ctx.directiveTts(res.endReply).directiveAudio(res.data[0]['audio-url']).record();
-                }
-                return ctx.query(res.reply).record();
-            }
-            if (res.data[0].type === 'play-record') {
-                const fileId = res.data[0]['file-id'];
-                const content = res.data[0].content;
-                const audio = res.data[0]['audio-url'];
-                const needRecord = ((res.data.length > 1) && (res.data[1].type === 'start-record'));
-
-                if (res.reply) {
-                    ctx.directiveTts(res.reply);
-                }
-                if (fileId && fileId !== '') {
-                    ctx.directiveRecord(fileId)
-                } else if (content && content != '') {
-                    ctx.directiveTts(content)
-                }
-                if (res.endReply) {
-                    ctx.directiveTts(res.endReply)
-                }
-                if (audio) {
-                    ctx.directiveAudio(audio)
-                }
-                if (needRecord) {
-                    ctx.response.record()
-                } else {
-                    ctx.response.wait()
-                }
-            }
         }
         let ret = ctx.query(res.reply);
         console.log(`the reply is ${JSON.stringify(ret)}`);
