@@ -12,7 +12,7 @@ class Chatbot {
                      session : user.user_id, 
                      agent   : this.agent, 
                      userContext : { access_token : user.access_token } };
-        logger.info("send to url", this.uri, "body", data)
+        logger.info("send to url", this.uri, "body", JSON.stringify(data))
         let response = await postJson(this.uri, data);
         logger.info('response', response)
         return this.formatResponse(response);
@@ -33,7 +33,7 @@ class Chatbot {
                      session : user.user_id, 
                      agent   : this.agent, 
                      userContext : { access_token : user.access_token } };
-
+        logger.info("send to url", this.uri, "body", JSON.stringify(data))
         let response = await postJson(this.uri, data);
         return this.formatResponse(response);
     }
