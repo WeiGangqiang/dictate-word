@@ -16,44 +16,72 @@ aixbot.use(async (ctx, next) => {
 
 // define middleware for DB
 aixbot.use(async (ctx, next) => {
-    ctx.words = [
-        "波浪","浪花","海浪","灯光","电灯","作文","工作"
-    ]
+    const chatbot = new Chatbot('dictation', 'http://101.132.183.112/chatbotv1/query');
+    const reply = async (ctx, getResponse) => {
+        const res = await getResponse();
+        if (res.data && res.data.length > 0) {
+            if (res.data[0].type === 'quit-app') return ctx.reply(res.reply).closeSession();
+            if (res.data[0].type === 'start-record') {
+                if (res.data[0]['audio-url']) {
+                    return ctx.directiveTts(res.endReply).directiveAudio(res.data[0]['audio-url']).record();
+                }
+                return ctx.query(res.reply).record();
+            }
+            if (res.data[0].type === 'play-record') {
+                const fileId = res.data[0]['file-id'];
+                const content = res.data[0].content;
+                const audio = res.data[0]['audio-url'];
+                const needRecord = ((res.data.length > 1) && (res.data[1].type === 'start-record'));
+
+                if (res.reply) {
+                    ctx.directiveTts(res.reply);
+                }
+                if (fileId && fileId !== '') {
+                    ctx.directiveRecord(fileId)
+                } else if (content && content != '') {
+                    ctx.directiveTts(content)
+                }
+                if (res.endReply) {
+                    ctx.directiveTts(res.endReply)
+                }
+                if (audio) {
+                    ctx.directiveAudio(audio)
+                }
+                if (needRecord) {
+                    ctx.response.record()
+                } else {
+                    ctx.response.wait()
+                }
+            }
+        }
+        let ret = ctx.query(res.reply);
+        console.log(`the reply is ${JSON.stringify(ret)}`);
+        return ret;
+    };
+    ctx.replyToText = async () => {
+        await reply(ctx, async () => {return await chatbot.replyToText(ctx.request.user, ctx.request.query)});
+    };
+    ctx.replyToEvent = async (eventName) => {
+        await reply(ctx, async () => {return await chatbot.replyToEvent(ctx.request.user, eventName)});
+    };
+    ctx.replyToRecord = async () => {
+        let asr = ctx.request.eventProperty.asr_text;
+        let fileId = ctx.request.eventProperty.msg_file_id;
+        await reply(ctx, async () => {return await chatbot.replyToRecord(ctx.request.user, asr, fileId)});
+    };
     await next();
 });
 
-// define event handler
-aixbot.onEvent('enterSkill', (ctx) => {
-    ctx.speak('现在开始默写今天的单词吧， 你准备好了吗').wait();
-});
-
-// define text handler
-aixbot.hears(/(好的)|(好了)|(行)|(可以)|(好)/, (ctx) => {
-    ctx.curWord = ctx.words[index]
-    index = (index + 1) % ctx.words.length
-    ctx.directiveTts(ctx.curWord).directiveAudio("http://xiaoda.ai/audios/audio?name=05").wait();
-});
-
-// define text handler
-aixbot.hears(/(下一个)|(换一个)|(写完了)|(换)|(再换)|(写好了)|(再换一个)|(再下一个)/, (ctx) => {
-    ctx.curWord = ctx.words[index]
-    index = (index + 1) % ctx.words.length
-    ctx.directiveTts(ctx.curWord).directiveAudio("http://xiaoda.ai/audios/audio?name=05").wait();
-});
-
 aixbot.onEvent('noResponse', async (ctx) =>{
-    // ctx.directiveAudio("http://xiaoda.ai/audios/audio?name=05").wait();
-    ctx.speak("写完了对我说下一个").wait();
+    await ctx.replyToEvent('no-response');
 });
 
-// define text handler
-aixbot.hears(/(退出)|(不写了)|(退出)|(离开)|(休息)/, (ctx) => {
-    ctx.reply('再见').closeSession();
+aixbot.onEvent('enterSkill', async (ctx) => {
+    await ctx.replyToEvent('open-app');
 });
 
-// close session
-aixbot.onEvent('quitSkill', (ctx) => {
-    ctx.reply('再见').closeSession();
+aixbot.onEvent('quitSkill', async (ctx) => {
+    await ctx.replyToEvent('close-app');
 });
 
 // define error handler
