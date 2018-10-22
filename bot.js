@@ -1,4 +1,5 @@
 const AixBot = require('aixbot');
+const Chatbot = require('./chatbot');
 const logger = require('./logger').logger('index');
 
 const aixbot = new AixBot();
