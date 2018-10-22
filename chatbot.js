@@ -12,8 +12,9 @@ class Chatbot {
                      session : user.user_id, 
                      agent   : this.agent, 
                      userContext : { access_token : user.access_token } };
-
+        logger.info("send to url", this.uri, "body", data)
         let response = await postJson(this.uri, data);
+        logger.info('response', response)
         return this.formatResponse(response);
     }
 
@@ -46,8 +47,6 @@ class Chatbot {
         }
         return response;
     }
-
-
 
     concatReplies(replies) {
         let ret = {}
