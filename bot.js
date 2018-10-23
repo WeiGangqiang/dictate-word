@@ -53,6 +53,10 @@ aixbot.onEvent('quitSkill', async (ctx) => {
     await ctx.replyToEvent('quit-dictation-skill');
 });
 
+aixbot.onEvent('inSkill', async (ctx) => {
+    await ctx.replyToText();
+});
+
 // define error handler
 aixbot.onError((err, ctx) => {
     logger.error(`error occurred: ${err}`);
