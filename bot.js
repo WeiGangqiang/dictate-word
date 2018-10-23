@@ -21,7 +21,7 @@ aixbot.use(async (ctx, next) => {
     const reply = async (ctx, getResponse) => {
         const res = await getResponse();
         if (res.data && res.data.length > 0) {
-            if (res.data[0].type === 'quit-app') return ctx.reply(res.reply).closeSession();
+            if (res.data[0].type === 'quit-dictation-skill') return ctx.reply(res.reply).closeSession();
         }
         let ret = ctx.query(res.reply);
         console.log(`the reply is ${JSON.stringify(ret)}`);
@@ -42,15 +42,15 @@ aixbot.use(async (ctx, next) => {
 });
 
 aixbot.onEvent('noResponse', async (ctx) =>{
-    await ctx.replyToEvent('no-response');
+    await ctx.replyToEvent('dictation-no-response');
 });
 
 aixbot.onEvent('enterSkill', async (ctx) => {
-    await ctx.replyToEvent('open-app');
+    await ctx.replyToEvent('open-dictation-skill');
 });
 
 aixbot.onEvent('quitSkill', async (ctx) => {
-    await ctx.replyToEvent('close-app');
+    await ctx.replyToEvent('quit-dictation-skill');
 });
 
 // define error handler
