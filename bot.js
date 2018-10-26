@@ -3,8 +3,8 @@ const Chatbot = require('./chatbot');
 const logger = require('./logger').logger('index');
 
 const aixbot = new AixBot();
-const dictationBot = new Chatbot('dictation', 'http://101.132.183.112/chatbotv1/query');
-const indentifyCodeBot = new Chatbot('indentifyCode', 'http://101.132.183.112/chatbotv1/query');
+const dictationBot = new Chatbot('dictation', 'http://xiaoda.ai/water-drop/qa/');
+const indentifyCodeBot = new Chatbot('indentifyCode', 'http://xiaoda.ai/water-drop/qa/');
 
 var chatBots = {
     "370643393107197952" : dictationBot,
