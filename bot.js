@@ -8,7 +8,7 @@ var index = 0
 
 // define middleware for response time
 aixbot.use(async (ctx, next) => {
-    console.log(`process request for '${ctx.request.query}' ... ${ctx}`);
+    console.log(`process request for '${ctx.request.query}' ... ${JSON.stringify(ctx)}`);
     var start = new Date().getTime();
     await next();
     var execTime = new Date().getTime() - start;
