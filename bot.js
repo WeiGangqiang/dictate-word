@@ -3,8 +3,17 @@ const Chatbot = require('./chatbot');
 const logger = require('./logger').logger('index');
 
 const aixbot = new AixBot();
+const dictationBot = new Chatbot('dictation', 'http://101.132.183.112/chatbotv1/query');
+const indentifyCodeBot = new Chatbot('indentifyCode', 'http://101.132.183.112/chatbotv1/query');
 
-var index = 0
+var chatBots = {
+    "370643393107197952" : dictationBot,
+    "372783328937380864" : indentifyCodeBot
+}
+
+function getAppId(ctx){
+    return ctx.req.session.application.app_id
+}
 
 // define middleware for response time
 aixbot.use(async (ctx, next) => {
@@ -17,40 +26,46 @@ aixbot.use(async (ctx, next) => {
 
 // define middleware for DB
 aixbot.use(async (ctx, next) => {
-    const chatbot = new Chatbot('dictation', 'http://101.132.183.112/chatbotv1/query');
     const reply = async (ctx, getResponse) => {
         const res = await getResponse();
         if (res.data && res.data.length > 0) {
-            if (res.data[0].type === 'quit-dictation-skill') return ctx.reply(res.reply).closeSession();
+            if (res.data[0].type === 'quit-skill') return ctx.reply(res.reply).closeSession();
         }
         let ret = ctx.query(res.reply);
         console.log(`the reply is ${JSON.stringify(ret)}`);
         return ret;
     };
     ctx.replyToText = async () => {
+        const appId = getAppId(ctx)
+        const chatbot = chatBots[appId]
+        if(!chatbot){
+            ctx.reply("抱歉，没有找到技能").closeSession();
+            return 
+        }
         await reply(ctx, async () => {return await chatbot.replyToText(ctx.request.user, ctx.request.query)});
     };
     ctx.replyToEvent = async (eventName) => {
-        await reply(ctx, async () => {return await chatbot.replyToEvent(ctx.request.user, eventName)});
-    };
-    ctx.replyToRecord = async () => {
-        let asr = ctx.request.eventProperty.asr_text;
-        let fileId = ctx.request.eventProperty.msg_file_id;
-        await reply(ctx, async () => {return await chatbot.replyToRecord(ctx.request.user, asr, fileId)});
+        const appId = getAppId(ctx)
+        const chatbot = chatBots[appId]
+        if(!chatbot){
+            ctx.reply("抱歉，没有找到技能").closeSession();
+            return 
+        }
+        await reply(ctx, async () => {return await chatbot.replyToEvent(ctx.request.user, eventName + chatbot.getAgent())});
     };
     await next();
 });
 
 aixbot.onEvent('noResponse', async (ctx) =>{
-    await ctx.replyToEvent('dictation-no-response');
+    await ctx.replyToEvent('no-response-');
 });
 
 aixbot.onEvent('enterSkill', async (ctx) => {
-    await ctx.replyToEvent('open-dictation-skill');
+    await ctx.replyToEvent('open-skill-');
 });
 
 aixbot.onEvent('quitSkill', async (ctx) => {
-    await ctx.replyToEvent('quit-dictation-skill');
+    await ctx.replyToEvent('quit-skill-');
 });
 
 aixbot.onEvent('inSkill', async (ctx) => {

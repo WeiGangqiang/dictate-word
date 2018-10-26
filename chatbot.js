@@ -36,6 +36,10 @@ class Chatbot {
         return this.formatResponse(response);
     }
 
+    getAgent(){
+        return this.agent
+    }
+
     formatResponse(response) {
         logger.debug(`chatbot reply ${JSON.stringify(response)}`);
         if (response.reply) {
