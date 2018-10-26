@@ -8,7 +8,12 @@ const indentifyCodeBot = new Chatbot('indentifyCode', 'http://101.132.183.112/ch
 
 var chatBots = {
     "370643393107197952" : dictationBot,
-    "372783328937380864" : indentifyCodeBot
+    "373172495844378624" : dictationBot,
+    "373173041628187648" : dictationBot,
+    "373171784578498560" : dictationBot,
+    "370993833464303616" : dictationBot,
+    "372783328937380864" : indentifyCodeBot,
+    "373171041582712832" : indentifyCodeBot
 }
 
 function getAppId(ctx){
@@ -17,7 +22,7 @@ function getAppId(ctx){
 
 // define middleware for response time
 aixbot.use(async (ctx, next) => {
-    console.log(`process request for '${ctx.request.query}' ... ${JSON.stringify(ctx)}`);
+    console.log(`process request for '${ctx.request.query}' ... ${getAppId(ctx)}`);
     var start = new Date().getTime();
     await next();
     var execTime = new Date().getTime() - start;
