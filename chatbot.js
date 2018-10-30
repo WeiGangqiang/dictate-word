@@ -11,7 +11,7 @@ class Chatbot {
         let data = { query   : { query : text, confidence : 1.0 }, 
                      session : "darwin_" + user.user_id, 
                      agent   : this.agent, 
-                     userContext : { access_token : user.access_token } };
+                     userContext : { access_token : user.access_token, support_display:false, source: 'xiaoai' } };
         let response = await postJson(this.uri, data);
         logger.info('response', response)
         return this.formatResponse(response);
@@ -21,7 +21,7 @@ class Chatbot {
         let data = { query   : { query : asr, confidence : 1.0 }, 
                      session : "darwin_" + user.user_id, 
                      agent   : this.agent, 
-                     userContext : { access_token : user.access_token, file_id : fileId } };
+                     userContext : { access_token : user.access_token, file_id : fileId, support_display:false, source: 'xiaoai' } };
 
         let response = await postJson(this.uri, data);
         return this.formatResponse(response);        
@@ -31,7 +31,7 @@ class Chatbot {
         let data = { event   : { name : eventType, content : params },
                      session : "darwin_" + user.user_id, 
                      agent   : this.agent, 
-                     userContext : { access_token : user.access_token } };
+                     userContext : { access_token : user.access_token, support_display:false, source: 'xiaoai' } };
         let response = await postJson(this.uri, data);
         return this.formatResponse(response);
     }

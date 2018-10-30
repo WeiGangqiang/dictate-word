@@ -16,13 +16,9 @@ var chatBots = {
     "373171041582712832" : indentifyCodeBot
 }
 
-function getAppId(ctx){
-    return ctx.req.session.application.app_id
-}
-
 // define middleware for response time
 aixbot.use(async (ctx, next) => {
-    console.log(`process request for '${ctx.request.query}' ... ${getAppId(ctx)}`);
+    console.log(`process request for '${ctx.request.query}' ... ${ctx.request.appId}`);
     var start = new Date().getTime();
     await next();
     var execTime = new Date().getTime() - start;
@@ -41,7 +37,7 @@ aixbot.use(async (ctx, next) => {
         return ret;
     };
     ctx.replyToText = async () => {
-        const appId = getAppId(ctx)
+        const appId = ctx.request.appId
         const chatbot = chatBots[appId]
         if(!chatbot){
             ctx.reply("抱歉，没有找到技能").closeSession();
@@ -50,7 +46,7 @@ aixbot.use(async (ctx, next) => {
         await reply(ctx, async () => {return await chatbot.replyToText(ctx.request.user, ctx.request.query)});
     };
     ctx.replyToEvent = async (eventName) => {
-        const appId = getAppId(ctx)
+        const appId = ctx.request.appId
         const chatbot = chatBots[appId]
         if(!chatbot){
             ctx.reply("抱歉，没有找到技能").closeSession();
