@@ -12,6 +12,7 @@ var chatBots = {
     "373173041628187648" : dictationBot,
     "373171784578498560" : dictationBot,
     "370993833464303616" : dictationBot,
+    "375371735773478912" : dictationBot,
     "372783328937380864" : indentifyCodeBot,
     "373171041582712832" : indentifyCodeBot
 }
