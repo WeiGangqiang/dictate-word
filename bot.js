@@ -34,9 +34,8 @@ aixbot.use(async (ctx, next) => {
             if (res.data[0].type === 'quit-skill') return ctx.reply(res.reply).closeSession();
             if (res.data[0].type === 'play-audio') {
                 if (res.data[0]['audio-url']) {
-                    return ctx.directiveTts(res.reply).directiveAudio(res.data[0]['audio-url']).record();
+                    return ctx.directiveTts(res.reply).directiveAudio(res.data[0]['audio-url']).wait()
                 }
-                return ctx.query(res.reply).record();
             }
         }
         let ret = ctx.query(res.reply);
