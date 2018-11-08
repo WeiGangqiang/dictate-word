@@ -35,13 +35,21 @@ aixbot.use(async (ctx, next) => {
         if (res.data && res.data.length > 0) {
             if (res.data[0].type === 'quit-skill') return ctx.reply(res.reply).closeSession();
             var response = ctx.directiveTts(res.reply)
+            var isQuitSkill = false
             for(var index in res.data ){
                 var item = res.data[index]
                 if(item.type === "play-audio") {
                     response.directiveAudio(item['audio-url'])
                 }
+                if(item.type === "quit-skill") {
+                    isQuitSkill = true
+                }
             }
-            return response.wait()
+            if(isQuitSkill){
+                return response.closeSession();
+            }else {
+                return response.wait()
+            }
         }
         let ret = ctx.query(res.reply);
         console.log(`the reply is ${JSON.stringify(ret)}`);
