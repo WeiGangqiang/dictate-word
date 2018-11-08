@@ -5,8 +5,6 @@ const logger = require('./logger').logger('index');
 const aixbot = new AixBot();
 const dictationBot = new Chatbot('dictation', 'http://xiaoda.ai/water-drop/qa/');
 const indentifyCodeBot = new Chatbot('indentifyCode', 'http://xiaoda.ai/water-drop/qa/');
-// const horoscopeBot = new Chatbot('horoscope', 'http://xiaoda.ai/water-drop/qa/');
-const horoscopeBot = new Chatbot('horoscope', 'http://101.132.183.112:6060/query');
 
 var chatBots = {
     "370643393107197952" : dictationBot,
@@ -16,8 +14,7 @@ var chatBots = {
     "370993833464303616" : dictationBot,
     "375371735773478912" : dictationBot,
     "372783328937380864" : indentifyCodeBot,
-    "373171041582712832" : indentifyCodeBot,
-    "376717286884510720" : horoscopeBot
+    "373171041582712832" : indentifyCodeBot
 }
 
 // define middleware for response time
@@ -34,18 +31,14 @@ aixbot.use(async (ctx, next) => {
     const reply = async (ctx, getResponse) => {
         const res = await getResponse();
         if (res.data && res.data.length > 0) {
+            if (res.data[0].type === 'quit-skill') return ctx.reply(res.reply).closeSession();
             ctx.directiveTts(res.reply)
-            var isQuitSkill = false
             for(var index in res.data ){
                 var item = res.data[index]
-                if(item.type === "play-audio") {
+                if(item.type === "play-audio")
                     ctx.directiveAudio(item['audio-url'])
                 }
-                if(item.type === 'quit-skill'){
-                    isQuitSkill = true
-                }
             }
-            if (isQuitSkill) { ctx.closeSession() }
             return ctx
         }
         let ret = ctx.query(res.reply);
