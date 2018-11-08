@@ -39,7 +39,7 @@ aixbot.use(async (ctx, next) => {
                     ctx.directiveAudio(item['audio-url'])
                 }
             }
-            return ctx
+            return ctx.wait()
         }
         let ret = ctx.query(res.reply);
         console.log(`the reply is ${JSON.stringify(ret)}`);
