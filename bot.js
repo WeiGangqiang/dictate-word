@@ -6,11 +6,12 @@ const aixbot = new AixBot();
 const dictationBot = new Chatbot('dictation', 'http://xiaoda.ai/water-drop/qa/');
 const indentifyCodeBot = new Chatbot('indentifyCode', 'http://xiaoda.ai/water-drop/qa/');
 const horoscopeBot = new Chatbot('horoscope', 'http://101.132.183.112:6060/query');
+const dictationDebug = new Chatbot('dictation', 'http://101.132.183.112:6060/query');
 var chatBots = {
     "370643393107197952" : dictationBot,
-    "373172495844378624" : dictationBot,
+    "373172495844378624" : dictationDebug,
     "373173041628187648" : dictationBot,
-    "373171784578498560" : dictationBot,
+    "373171784578498560" : dictationDebug,
     "370993833464303616" : dictationBot,
     "375371735773478912" : dictationBot,
     "372783328937380864" : indentifyCodeBot,
