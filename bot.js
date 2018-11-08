@@ -5,6 +5,8 @@ const logger = require('./logger').logger('index');
 const aixbot = new AixBot();
 const dictationBot = new Chatbot('dictation', 'http://xiaoda.ai/water-drop/qa/');
 const indentifyCodeBot = new Chatbot('indentifyCode', 'http://xiaoda.ai/water-drop/qa/');
+// const horoscopeBot = new Chatbot('horoscope', 'http://xiaoda.ai/water-drop/qa/');
+const horoscopeBot = new Chatbot('horoscope', 'http://101.132.183.112:6060/query/');
 
 var chatBots = {
     "370643393107197952" : dictationBot,
@@ -14,7 +16,8 @@ var chatBots = {
     "370993833464303616" : dictationBot,
     "375371735773478912" : dictationBot,
     "372783328937380864" : indentifyCodeBot,
-    "373171041582712832" : indentifyCodeBot
+    "373171041582712832" : indentifyCodeBot,
+    "376717286884510720" : horoscopeBot
 }
 
 // define middleware for response time
