@@ -35,7 +35,7 @@ aixbot.use(async (ctx, next) => {
             ctx.directiveTts(res.reply)
             for(var index in res.data ){
                 var item = res.data[index]
-                if(item.type === "play-audio")
+                if(item.type === "play-audio") {
                     ctx.directiveAudio(item['audio-url'])
                 }
             }
