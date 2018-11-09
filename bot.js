@@ -16,7 +16,7 @@ var chatBots = {
     "375371735773478912" : dictationBot,
     "372783328937380864" : indentifyCodeBot,
     "373171041582712832" : indentifyCodeBot,
-    "376717286884510720" : horoscopeBot
+    "378287272711161856" : horoscopeBot
 }
 
 // define middleware for response time
