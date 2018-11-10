@@ -20,7 +20,10 @@ var chatBots = {
     "372783328937380864" : indentifyCodeBot,
     "373171041582712832" : indentifyCodeBot,
     "378287272711161856" : horoscopeBot,
-    "376719938448002048" : luckyNumberBot
+    "376718431111613440" : horoscopeBot,
+    "376719938448002048" : luckyNumberBot,
+    "376719607714547712" : luckyColorBot,
+    "376717867380375552" : huangliBot
 }
 
 // define middleware for response time
