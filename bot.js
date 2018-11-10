@@ -6,7 +6,9 @@ const aixbot = new AixBot();
 const dictationBot = new Chatbot('dictation','dictation', 'http://xiaoda.ai/water-drop/qa/');
 const indentifyCodeBot = new Chatbot('indentifyCode', 'indentifyCode', 'http://xiaoda.ai/water-drop/qa/');
 const horoscopeBot = new Chatbot('horoscope','horoscope', 'http://xiaoda.ai/water-drop/qa/');
-// const horoscopeBot = new Chatbot('horoscope', 'http://101.132.183.112:6060/query');
+const luckyNumberBot = new Chatbot('horoscope', 'luckyNumber', 'http://101.132.183.112:6060/query');
+const luckyColorBot = new Chatbot('horoscope', 'luckyColor', 'http://101.132.183.112:6060/query');
+const huangliBot = new Chatbot('horoscope', 'huangli', 'http://101.132.183.112:6060/query');
 const dictationDebug = new Chatbot('dictation','dictation', 'http://101.132.183.112:6060/query');
 var chatBots = {
     "370643393107197952" : dictationBot,
@@ -17,7 +19,8 @@ var chatBots = {
     "375371735773478912" : dictationBot,
     "372783328937380864" : indentifyCodeBot,
     "373171041582712832" : indentifyCodeBot,
-    "378287272711161856" : horoscopeBot
+    "378287272711161856" : horoscopeBot,
+    "376719938448002048" : luckyNumberBot
 }
 
 // define middleware for response time
