@@ -22,7 +22,7 @@ var chatBots = {
 
 // define middleware for response time
 aixbot.use(async (ctx, next) => {
-    console.log(`process request for '${ctx.request.query}' ... ${ctx.request.appId}`);
+    console.log(`receive from app: ${ctx.request.appId} request query: ${ctx.request.query} requestId : ${ctx.request.requestId}`);
     var start = new Date().getTime();
     await next();
     var execTime = new Date().getTime() - start;
