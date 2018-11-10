@@ -2,8 +2,9 @@ const postJson = require('./postjson');
 const logger = require('./logger').logger('chatbot');
 
 class Chatbot {
-    constructor(agent, uri) {
+    constructor(agent, skillName, uri) {
         this.agent = agent;
+        this.skillName = skillName
         this.uri = uri;
     }
     
@@ -36,8 +37,8 @@ class Chatbot {
         return this.formatResponse(response);
     }
 
-    getAgent(){
-        return this.agent
+    getSkillName(){
+        return this.skillName
     }
 
     formatResponse(response) {

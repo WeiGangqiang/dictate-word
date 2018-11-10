@@ -3,11 +3,11 @@ const Chatbot = require('./chatbot');
 const logger = require('./logger').logger('index');
 
 const aixbot = new AixBot();
-const dictationBot = new Chatbot('dictation', 'http://xiaoda.ai/water-drop/qa/');
-const indentifyCodeBot = new Chatbot('indentifyCode', 'http://xiaoda.ai/water-drop/qa/');
-const horoscopeBot = new Chatbot('horoscope', 'http://xiaoda.ai/water-drop/qa/');
+const dictationBot = new Chatbot('dictation','dictation', 'http://xiaoda.ai/water-drop/qa/');
+const indentifyCodeBot = new Chatbot('indentifyCode', 'indentifyCode', 'http://xiaoda.ai/water-drop/qa/');
+const horoscopeBot = new Chatbot('horoscope','horoscope', 'http://xiaoda.ai/water-drop/qa/');
 // const horoscopeBot = new Chatbot('horoscope', 'http://101.132.183.112:6060/query');
-const dictationDebug = new Chatbot('dictation', 'http://101.132.183.112:6060/query');
+const dictationDebug = new Chatbot('dictation','dictation', 'http://101.132.183.112:6060/query');
 var chatBots = {
     "370643393107197952" : dictationBot,
     "373172495844378624" : dictationDebug,
@@ -72,7 +72,7 @@ aixbot.use(async (ctx, next) => {
             ctx.reply("抱歉，没有找到技能").closeSession();
             return 
         }
-        await reply(ctx, async () => {return await chatbot.replyToEvent(ctx.request.user, eventName + chatbot.getAgent())});
+        await reply(ctx, async () => {return await chatbot.replyToEvent(ctx.request.user, eventName + chatbot.getSkillName())});
     };
     await next();
 });
