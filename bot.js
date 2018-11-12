@@ -8,7 +8,7 @@ const indentifyCodeBot = new Chatbot('indentifyCode', 'indentifyCode', 'http://x
 const horoscopeBot = new Chatbot('horoscope','horoscope', 'http://xiaoda.ai/water-drop/qa/');
 const luckyNumberBot = new Chatbot('horoscope', 'lucky-number', 'http://xiaoda.ai/water-drop/qa/');
 const luckyColorBot = new Chatbot('horoscope', 'lucky-color', 'http://xiaoda.ai/water-drop/qa/');
-const huangliBot = new Chatbot('horoscope', 'huangli', 'http://101.132.183.112:6060/query');
+const huangliBot = new Chatbot('horoscope', 'huangli', 'http://xiaoda.ai/water-drop/qa/');
 const dictationDebug = new Chatbot('dictation','dictation', 'http://101.132.183.112:6060/query');
 var chatBots = {
     "370643393107197952" : dictationBot,
