@@ -10,6 +10,7 @@ const luckyNumberBot = new Chatbot('horoscope', 'lucky-number', 'http://xiaoda.a
 const luckyColorBot = new Chatbot('horoscope', 'lucky-color', 'http://xiaoda.ai/water-drop/qa/');
 const huangliBot = new Chatbot('horoscope', 'huangli', 'http://xiaoda.ai/water-drop/qa/');
 const dictationDebug = new Chatbot('dictation','dictation', 'http://101.132.183.112:6060/query');
+const tossCoinBot = new Chatbot('toss-coin','toss-coin', 'http://101.132.183.112:6060/query');
 var chatBots = {
     "370643393107197952" : dictationBot,
     "373172495844378624" : dictationDebug,
@@ -23,7 +24,8 @@ var chatBots = {
     "376718431111613440" : horoscopeBot,
     "376719938448002048" : luckyNumberBot,
     "376719607714547712" : luckyColorBot,
-    "376717867380375552" : huangliBot
+    "376717867380375552" : huangliBot,
+    "380813201194886144" : tossCoinBot
 }
 
 // define middleware for response time
