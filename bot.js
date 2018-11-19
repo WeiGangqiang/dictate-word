@@ -45,6 +45,9 @@ aixbot.use(async (ctx, next) => {
                 if(item.type === "play-audio") {
                     response.directiveAudio(item['audio-url'])
                 }
+                if(item.type === "text") {
+                    response.directiveTts(item['reply'])
+                }
                 if(item.type === "quit-skill") {
                     isQuitSkill = true
                 }

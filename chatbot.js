@@ -45,9 +45,9 @@ class Chatbot {
         logger.debug(`chatbot reply ${JSON.stringify(response)}`);
         if (response.reply) {
             response.reply = response.reply.join("")
-            if(response.data){
-                response.reply = response.reply + this.concatTextReply(response.data)
-            }
+            // if(response.data){
+            //     response.reply = response.reply + this.concatTextReply(response.data)
+            // }
         }
         return response;
     }
