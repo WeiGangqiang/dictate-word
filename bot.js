@@ -12,9 +12,8 @@ const huangliBot = new Chatbot('horoscope', 'huangli', 'http://xiaoda.ai/water-d
 const dictationDebug = new Chatbot('dictation','dictation', 'http://101.132.183.112:6060/query');
 const tossCoinBot = new Chatbot('toss-coin','toss-coin', 'http://xiaoda.ai/water-drop/qa/');
 const coinBot = new Chatbot('toss-coin','coin', 'http://xiaoda.ai/water-drop/qa/');
-const dinnerDecisionBot = new Chatbot('dinner-decision','dinner-decision', 'http://101.132.183.112:6060/query');
-const dinnerBot = new Chatbot('dinner-decision','dinner-decision', 'http://101.132.183.112:6060/query');
-const parrotBot = new Chatbot('parrot','parrot', 'http://101.132.183.112:6060/query');
+const dinnerDecisionBot = new Chatbot('dinner-decision','dinner-decision', 'http://xiaoda.ai/water-drop/qa/');
+const parrotBot = new Chatbot('parrot','parrot', 'http://xiaoda.ai/water-drop/qa/');
 
 var chatBots = {
     "370643393107197952" : dictationBot,
@@ -33,7 +32,6 @@ var chatBots = {
     "382177231385920512" : tossCoinBot,
     "381833660686410752" : coinBot,
     "381078346424912896" : dinnerDecisionBot,
-    "381079172719578112" : dinnerBot,
     "382938508622299136" : parrotBot
 
 }
