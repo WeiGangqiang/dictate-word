@@ -12,7 +12,7 @@ const huangliBot = new Chatbot('horoscope', 'huangli', 'http://xiaoda.ai/water-d
 const dictationDebug = new Chatbot('dictation','dictation', 'http://101.132.183.112:6060/query');
 const tossCoinBot = new Chatbot('toss-coin','toss-coin', 'http://xiaoda.ai/water-drop/qa/');
 const coinBot = new Chatbot('toss-coin','coin', 'http://xiaoda.ai/water-drop/qa/');
-const dinnerDecisionBot = new Chatbot('dinner-decision','dinner-decision', 'http://xiaoda.ai/water-drop/qa/');
+const dinnerDecisionBot = new Chatbot('dinner-decision','dinner-decision', 'http://101.132.183.112:6060/query');
 const parrotBot = new Chatbot('parrot','parrot', 'http://xiaoda.ai/water-drop/qa/');
 
 var chatBots = {
