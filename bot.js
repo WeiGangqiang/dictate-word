@@ -5,13 +5,12 @@ const logger = require('./logger').logger('index');
 const aixbot = new AixBot();
 const dictationBot = new Chatbot('dictation','dictation', 'http://xiaoda.ai/water-drop/qa/');
 const indentifyCodeBot = new Chatbot('indentifyCode', 'indentifyCode', 'http://xiaoda.ai/water-drop/qa/');
-const horoscopeBot = new Chatbot('horoscope','horoscope', 'http://101.132.183.112:6060/query');
+const horoscopeBot = new Chatbot('horoscope','my-horoscope', 'http://101.132.183.112:6060/query');
 const luckyNumberBot = new Chatbot('horoscope', 'lucky-number', 'http://xiaoda.ai/water-drop/qa/');
 const luckyColorBot = new Chatbot('horoscope', 'lucky-color', 'http://xiaoda.ai/water-drop/qa/');
 const huangliBot = new Chatbot('horoscope', 'huangli', 'http://xiaoda.ai/water-drop/qa/');
 const dictationDebug = new Chatbot('dictation','dictation', 'http://101.132.183.112:6060/query');
 const tossCoinBot = new Chatbot('toss-coin','toss-coin', 'http://xiaoda.ai/water-drop/qa/');
-const coinBot = new Chatbot('toss-coin','coin', 'http://xiaoda.ai/water-drop/qa/');
 const dinnerDecisionBot = new Chatbot('dinner-decision','dinner-decision', 'http://101.132.183.112:6060/query');
 const parrotBot = new Chatbot('parrot','parrot', 'http://xiaoda.ai/water-drop/qa/');
 
@@ -30,7 +29,6 @@ var chatBots = {
     "376719607714547712" : luckyColorBot,
     "376717867380375552" : huangliBot,
     "382177231385920512" : tossCoinBot,
-    "381833660686410752" : coinBot,
     "381078346424912896" : dinnerDecisionBot,
     "382938508622299136" : parrotBot
 
